@@ -1,0 +1,160 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Reports.AthleteResultsModel
+
+@{
+    ViewData["Title"] = "Athlete Results";
+}
+
+<h2 class="mb-4">
+    Athlete Results Report
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search athlete or sport..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   name="MinPlace"
+                   value="@Model.MinPlace"
+                   class="form-control"
+                   placeholder="Min place" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   name="MaxPlace"
+                   value="@Model.MaxPlace"
+                   class="form-control"
+                   placeholder="Max place" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Apply
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<form method="post"
+      asp-page-handler="Export"
+      class="mb-3">
+
+    <input type="hidden"
+           name="SearchTerm"
+           value="@Model.SearchTerm" />
+
+    <input type="hidden"
+           name="MinPlace"
+           value="@Model.MinPlace" />
+
+    <input type="hidden"
+           name="MaxPlace"
+           value="@Model.MaxPlace" />
+
+    <input type="hidden"
+           name="SortColumn"
+           value="@Model.SortColumn" />
+
+    <input type="hidden"
+           name="SortDirection"
+           value="@Model.SortDirection" />
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Download Excel
+
+    </button>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="ParticipantName">
+
+                Athlete ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="SportName">
+
+                Sport ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="Place">
+
+                Place ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="ResultValue">
+
+                Result ↑↓
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ReportRows)
+        {
+            <tr>
+
+                <td>
+                    @item.FullName
+                </td>
+
+                <td>
+                    @item.SportName
+                </td>
+
+                <td>
+                    @item.Place
+                </td>
+
+                <td>
+                    @item.Result
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

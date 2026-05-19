@@ -1,0 +1,131 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.Sports.IndexModel
+
+@{
+    ViewData["Title"] = "Sports";
+}
+
+<h2 class="mb-4">
+    Sports
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<a asp-page="Create"
+   class="btn btn-success btn-create">
+
+    Add Sport
+
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="SportId">
+
+                ID ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="SportName">
+
+                Sport Name ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="SportType">
+
+                Sport Type ↑↓
+
+            </th>
+
+            <th width="180">
+                Actions
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Sports)
+        {
+            <tr>
+
+                <td>
+                    @item.SportId
+                </td>
+
+                <td>
+                    @item.SportName
+                </td>
+
+                <td>
+                    @item.SportType
+                </td>
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <a asp-page="Edit"
+                           asp-route-id="@item.SportId"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a asp-page="Delete"
+                           asp-route-id="@item.SportId"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

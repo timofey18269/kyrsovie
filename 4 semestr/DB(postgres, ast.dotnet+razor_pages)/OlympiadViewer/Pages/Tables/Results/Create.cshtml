@@ -1,0 +1,110 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.Results.CreateModel
+
+@{
+    ViewData["Title"] = "Create Result";
+}
+
+<h2 class="mb-4">
+    Create Result
+</h2>
+
+<div class="form-container">
+
+    <form method="post">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Sport
+            </label>
+
+            <select asp-for="Result.SportId"
+                    asp-items="Model.Sports"
+                    class="form-select">
+
+                <option value="">
+                    Select Sport
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Participant
+            </label>
+
+            <select asp-for="Result.ParticipantId"
+                    asp-items="Model.Participants"
+                    class="form-select">
+
+                <option value="">
+                    Select Participant
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Start
+            </label>
+
+            <select asp-for="Result.StartId"
+                    asp-items="Model.Starts"
+                    class="form-select">
+
+                <option value="">
+                    Select Start
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Place
+            </label>
+
+            <input asp-for="Result.Place"
+                   type="number"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Result Value
+            </label>
+
+            <input asp-for="Result.ResultValue"
+                   class="form-control" />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Save
+
+        </button>
+
+        <a asp-page="Index"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </form>
+
+</div>

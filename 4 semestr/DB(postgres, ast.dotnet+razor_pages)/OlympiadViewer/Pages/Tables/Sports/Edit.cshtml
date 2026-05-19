@@ -1,0 +1,77 @@
+﻿@page "{id:int}"
+
+@model OlympiadViewer.Pages.Tables.Sports.EditModel
+
+@{
+    ViewData["Title"] = "Edit Sport";
+}
+
+<h2 class="mb-4">
+    Edit Sport
+</h2>
+
+<div class="form-container">
+
+    <form method="post">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                ID
+            </label>
+
+            <input asp-for="Sport.SportId"
+                   class="form-control"
+                   readonly />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Sport Name
+            </label>
+
+            <input asp-for="Sport.SportName"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Sport Type
+            </label>
+
+            <select asp-for="Sport.SportType"
+                    class="form-select">
+
+                <option value="individual">
+                    individual
+                </option>
+
+                <option value="team">
+                    team
+                </option>
+
+            </select>
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-warning">
+
+            Save
+
+        </button>
+
+        <a asp-page="Index"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </form>
+
+</div>

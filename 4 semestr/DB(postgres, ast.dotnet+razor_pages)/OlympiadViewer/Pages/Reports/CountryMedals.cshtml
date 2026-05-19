@@ -1,0 +1,171 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Reports.CountryMedalsModel
+
+@{
+    ViewData["Title"] = "Country Medals";
+}
+
+<h2 class="mb-4">
+    Country Medals Report
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search country..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   name="MinGold"
+                   value="@Model.MinGold"
+                   class="form-control"
+                   placeholder="Min gold" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   name="MaxGold"
+                   value="@Model.MaxGold"
+                   class="form-control"
+                   placeholder="Max gold" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Apply
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<form method="post"
+      asp-page-handler="Export"
+      class="mb-3">
+
+    <input type="hidden"
+           name="SearchTerm"
+           value="@Model.SearchTerm" />
+
+    <input type="hidden"
+           name="MinGold"
+           value="@Model.MinGold" />
+
+    <input type="hidden"
+           name="MaxGold"
+           value="@Model.MaxGold" />
+
+    <input type="hidden"
+           name="SortColumn"
+           value="@Model.SortColumn" />
+
+    <input type="hidden"
+           name="SortDirection"
+           value="@Model.SortDirection" />
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Download Excel
+
+    </button>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="CountryName">
+
+                Country ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="GoldMedals">
+
+                Gold ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="SilverMedals">
+
+                Silver ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="BronzeMedals">
+
+                Bronze ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="TotalMedals">
+
+                Total ↑↓
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ReportRows)
+        {
+            <tr>
+
+                <td>
+                    @item.CountryName
+                </td>
+
+                <td>
+                    @item.GoldMedals
+                </td>
+
+                <td>
+                    @item.SilverMedals
+                </td>
+
+                <td>
+                    @item.BronzeMedals
+                </td>
+
+                <td>
+                    @item.TotalMedals
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

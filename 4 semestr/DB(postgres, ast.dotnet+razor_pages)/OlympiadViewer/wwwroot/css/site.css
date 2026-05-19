@@ -1,0 +1,156 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+/* =========================================================
+   LAYOUT
+========================================================= */
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar-container {
+    width: 260px;
+    background-color: #1f2937;
+    color: white;
+    min-height: 100vh;
+}
+
+.sidebar {
+    padding: 20px;
+}
+
+.sidebar-title {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.sidebar-section {
+    margin-bottom: 25px;
+}
+
+.sidebar-section-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding-left: 0;
+}
+
+    .sidebar-menu li {
+        margin-bottom: 10px;
+    }
+
+    .sidebar-menu a {
+        color: #d1d5db;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+        .sidebar-menu a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-container {
+    flex: 1;
+    background-color: #f3f4f6;
+}
+
+.topbar {
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.content-area {
+    padding: 25px;
+}
+
+
+/* =========================================================
+   TABLES
+========================================================= */
+
+table {
+    background-color: white;
+}
+
+th {
+    background-color: #e5e7eb;
+}
+
+.table-actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   FORMS
+========================================================= */
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn-create {
+    margin-bottom: 15px;
+}

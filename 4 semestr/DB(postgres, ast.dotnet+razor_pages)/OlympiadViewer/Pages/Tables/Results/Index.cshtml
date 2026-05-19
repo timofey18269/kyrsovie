@@ -1,0 +1,169 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.Results.IndexModel
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h2 class="mb-4">
+    Results
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   name="MinPlace"
+                   value="@Model.MinPlace"
+                   class="form-control"
+                   placeholder="Min place" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   name="MaxPlace"
+                   value="@Model.MaxPlace"
+                   class="form-control"
+                   placeholder="Max place" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Apply
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<a asp-page="Create"
+   class="btn btn-success btn-create">
+
+    Add Result
+
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="ResultId">
+                ID ↑↓
+            </th>
+
+            <th>
+                Participant
+            </th>
+
+            <th>
+                Sport
+            </th>
+
+            <th>
+                Start ID
+            </th>
+
+            <th class="sortable"
+                data-column="Place">
+                Place ↑↓
+            </th>
+
+            <th class="sortable"
+                data-column="ResultValue">
+                Result ↑↓
+            </th>
+
+            <th width="180">
+                Actions
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+
+                <td>
+                    @item.ResultId
+                </td>
+
+                <td>
+                    @item.Participant?.FullName
+                </td>
+
+                <td>
+                    @item.Sport?.SportName
+                </td>
+
+                <td>
+                    @item.StartId
+                </td>
+
+                <td>
+                    @item.Place
+                </td>
+
+                <td>
+                    @item.ResultValue
+                </td>
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <a asp-page="Edit"
+                           asp-route-id="@item.ResultId"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a asp-page="Delete"
+                           asp-route-id="@item.ResultId"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

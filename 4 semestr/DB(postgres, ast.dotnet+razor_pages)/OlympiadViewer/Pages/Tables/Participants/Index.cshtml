@@ -1,0 +1,165 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.Participants.IndexModel
+
+@{
+    ViewData["Title"] = "Participants";
+}
+
+<h2 class="mb-4">
+    Participants
+</h2>
+
+<!-- SEARCH + FILTER -->
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   step="1"
+                   name="MinAge"
+                   value="@Model.MinAge"
+                   class="form-control"
+                   placeholder="Min age" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   step="1"
+                   name="MaxAge"
+                   value="@Model.MaxAge"
+                   class="form-control"
+                   placeholder="Max age" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Apply
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<a asp-page="Create"
+   class="btn btn-success btn-create">
+
+    Add Participant
+
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="ParticipantId">
+                ID ↑↓
+            </th>
+
+            <th class="sortable"
+                data-column="FullName">
+                Full Name ↑↓
+            </th>
+
+            <th>
+                Country
+            </th>
+
+            <th>
+                Sport
+            </th>
+
+            <th class="sortable"
+                data-column="BirthDate">
+                Birth Date ↑↓
+            </th>
+
+            <th width="180">
+                Actions
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Participants)
+        {
+            <tr>
+
+                <td>
+                    @item.ParticipantId
+                </td>
+
+                <td>
+                    @item.FullName
+                </td>
+
+                <td>
+                    @item.Country?.Name
+                </td>
+
+                <td>
+                    @item.Sport?.SportName
+                </td>
+
+                <td>
+                    @item.BirthDate.ToShortDateString()
+                </td>
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <a asp-page="Edit"
+                           asp-route-id="@item.ParticipantId"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a asp-page="Delete"
+                           asp-route-id="@item.ParticipantId"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

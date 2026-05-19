@@ -1,0 +1,140 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Reports.AverageAgeBySportModel
+
+@{
+    ViewData["Title"] = "Average Age By Sport";
+}
+
+<h2 class="mb-4">
+    Average Age By Sport
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search sport..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   step="0.1"
+                   name="MinAge"
+                   value="@Model.MinAge"
+                   class="form-control"
+                   placeholder="Min age" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <input type="number"
+                   step="0.1"
+                   name="MaxAge"
+                   value="@Model.MaxAge"
+                   class="form-control"
+                   placeholder="Max age" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Apply
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<form method="post"
+      asp-page-handler="Export"
+      class="mb-3">
+
+    <input type="hidden"
+           name="SearchTerm"
+           value="@Model.SearchTerm" />
+
+    <input type="hidden"
+           name="MinAge"
+           value="@Model.MinAge" />
+
+    <input type="hidden"
+           name="MaxAge"
+           value="@Model.MaxAge" />
+
+    <input type="hidden"
+           name="SortColumn"
+           value="@Model.SortColumn" />
+
+    <input type="hidden"
+           name="SortDirection"
+           value="@Model.SortDirection" />
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Download Excel
+
+    </button>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="SportName">
+
+                Sport ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="AverageAge">
+
+                Average Age ↑↓
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ReportRows)
+        {
+            <tr>
+
+                <td>
+                    @item.SportName
+                </td>
+
+                <td>
+                    @Math.Round(item.AverageAge, 1)
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

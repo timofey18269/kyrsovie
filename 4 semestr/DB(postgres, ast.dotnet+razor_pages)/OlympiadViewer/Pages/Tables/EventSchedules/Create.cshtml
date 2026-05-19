@@ -1,0 +1,105 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.EventSchedules.CreateModel
+
+@{
+    ViewData["Title"] = "Create Schedule";
+}
+
+<h2 class="mb-4">
+    Create Schedule
+</h2>
+
+<div class="form-container">
+
+    <form method="post">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Sport
+            </label>
+
+            <select asp-for="EventSchedule.SportId"
+                    asp-items="Model.Sports"
+                    class="form-select">
+
+                <option value="">
+                    Select Sport
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Date
+            </label>
+
+            <input asp-for="EventSchedule.StartDate"
+                   type="date"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Start Time
+            </label>
+
+            <input asp-for="EventSchedule.StartTime"
+                   type="time"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                End Time
+            </label>
+
+            <input asp-for="EventSchedule.EndTime"
+                   type="time"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Venue
+            </label>
+
+            <select asp-for="EventSchedule.VenueId"
+                    asp-items="Model.Venues"
+                    class="form-select">
+
+                <option value="">
+                    Select Venue
+                </option>
+
+            </select>
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+
+            Save
+
+        </button>
+
+        <a asp-page="Index"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </form>
+
+</div>

@@ -1,0 +1,139 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.Venues.IndexModel
+
+@{
+    ViewData["Title"] = "Venues";
+}
+
+<h2 class="mb-4">
+    Venues
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<a asp-page="Create"
+   class="btn btn-success btn-create">
+
+    Add Venue
+
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="VenueId">
+
+                ID ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="Name">
+
+                Name ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="Location">
+
+                Location ↑↓
+
+            </th>
+
+            <th>
+                Possible Sports
+            </th>
+
+            <th width="180">
+                Actions
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Venues)
+        {
+            <tr>
+
+                <td>
+                    @item.VenueId
+                </td>
+
+                <td>
+                    @item.Name
+                </td>
+
+                <td>
+                    @item.Location
+                </td>
+
+                <td>
+                    @string.Join(", ", item.PossibleSports ?? Array.Empty<int>())
+                </td>
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <a asp-page="Edit"
+                           asp-route-id="@item.VenueId"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a asp-page="Delete"
+                           asp-route-id="@item.VenueId"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

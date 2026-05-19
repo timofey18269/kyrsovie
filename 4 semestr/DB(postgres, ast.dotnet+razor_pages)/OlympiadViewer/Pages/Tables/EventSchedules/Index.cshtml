@@ -1,0 +1,156 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.EventSchedules.IndexModel
+
+@{
+    ViewData["Title"] = "Event Schedules";
+}
+
+<h2 class="mb-4">
+    Event Schedules
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="date"
+                   name="FromDate"
+                   value="@Model.FromDate?.ToString("yyyy-MM-dd")"
+                   class="form-control" />
+
+        </div>
+
+        <div class="col-md-3">
+
+            <input type="date"
+                   name="ToDate"
+                   value="@Model.ToDate?.ToString("yyyy-MM-dd")"
+                   class="form-control" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Filter
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<a asp-page="Create"
+   class="btn btn-success btn-create">
+
+    Add Schedule
+
+</a>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="StartId">
+                ID ↑↓
+            </th>
+
+            <th>
+                Sport
+            </th>
+
+            <th class="sortable"
+                data-column="StartDate">
+                Date ↑↓
+            </th>
+
+            <th>
+                Start Time
+            </th>
+
+            <th>
+                End Time
+            </th>
+
+            <th>
+                Venue
+            </th>
+
+            <th width="180">
+                Actions
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.EventSchedules)
+        {
+            <tr>
+
+                <td>
+                    @item.StartId
+                </td>
+
+                <td>
+                    @item.Sport?.SportName
+                </td>
+
+                <td>
+                    @item.StartDate.ToString("dd.MM.yyyy")
+                </td>
+
+                <td>
+                    @item.StartTime
+                </td>
+
+                <td>
+                    @item.EndTime
+                </td>
+
+                <td>
+                    @item.Venue?.Name
+                </td>
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <a asp-page="Edit"
+                           asp-route-id="@item.StartId"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a asp-page="Delete"
+                           asp-route-id="@item.StartId"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

@@ -1,0 +1,132 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Tables.Countries.IndexModel
+
+@{
+    ViewData["Title"] = "Countries";
+}
+
+<h2 class="mb-4">
+    Countries
+</h2>
+
+<!-- ========================================================= -->
+<!-- SEARCH -->
+<!-- ========================================================= -->
+
+<form method="get" class="mb-4">
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <input type="text"
+                   name="SearchTerm"
+                   value="@Model.SearchTerm"
+                   class="form-control"
+                   placeholder="Search..." />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Search
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<!-- ========================================================= -->
+<!-- CREATE BUTTON -->
+<!-- ========================================================= -->
+
+<a asp-page="Create"
+   class="btn btn-success btn-create">
+
+    Add Country
+
+</a>
+
+<!-- ========================================================= -->
+<!-- TABLE -->
+<!-- ========================================================= -->
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="CountryCode">
+
+                Country Code ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="Name">
+
+                Name ↑↓
+
+            </th>
+
+            <th width="180">
+                Actions
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Countries)
+        {
+            <tr>
+
+                <td>
+                    @item.CountryCode
+                </td>
+
+                <td>
+                    @item.Name
+                </td>
+
+                <td>
+
+                    <div class="table-actions">
+
+                        <a asp-page="Edit"
+                           asp-route-id="@item.CountryCode"
+                           class="btn btn-warning btn-sm">
+
+                            Edit
+
+                        </a>
+
+                        <a asp-page="Delete"
+                           asp-route-id="@item.CountryCode"
+                           class="btn btn-danger btn-sm">
+
+                            Delete
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

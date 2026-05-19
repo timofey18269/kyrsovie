@@ -1,0 +1,140 @@
+﻿@page
+
+@model OlympiadViewer.Pages.Reports.ScheduleByVenueModel
+
+@{
+    ViewData["Title"] = "Schedule By Venue";
+}
+
+<h2 class="mb-4">
+    Schedule By Venue
+</h2>
+
+<form method="get" class="mb-4">
+
+    <div class="row g-2">
+
+        <div class="col-md-3">
+
+            <input type="date"
+                   name="SelectedDate"
+                   value="@Model.SelectedDate"
+                   class="form-control" />
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Filter
+
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+<form method="post"
+      asp-page-handler="Export"
+      class="mb-3">
+
+    <input type="hidden"
+           name="SelectedDate"
+           value="@Model.SelectedDate" />
+
+    <input type="hidden"
+           name="SortColumn"
+           value="@Model.SortColumn" />
+
+    <input type="hidden"
+           name="SortDirection"
+           value="@Model.SortDirection" />
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Download Excel
+
+    </button>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+    <thead>
+
+        <tr>
+
+            <th class="sortable"
+                data-column="VenueName">
+
+                Venue ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="SportName">
+
+                Sport ↑↓
+
+            </th>
+
+            <th class="sortable"
+                data-column="StartDate">
+
+                Date ↑↓
+
+            </th>
+
+            <th>
+
+                Start Time
+
+            </th>
+
+            <th>
+
+                End Time
+
+            </th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ReportRows)
+        {
+            <tr>
+
+                <td>
+                    @item.VenueName
+                </td>
+
+                <td>
+                    @item.SportName
+                </td>
+
+                <td>
+                    @item.StartDate
+                </td>
+
+                <td>
+                    @item.StartTime
+                </td>
+
+                <td>
+                    @item.EndTime
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+
+</table>

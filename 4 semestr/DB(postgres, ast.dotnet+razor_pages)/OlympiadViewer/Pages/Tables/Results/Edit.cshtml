@@ -1,0 +1,98 @@
+﻿@page "{id:int}"
+
+@model OlympiadViewer.Pages.Tables.Results.EditModel
+
+@{
+    ViewData["Title"] = "Edit Result";
+}
+
+<h2 class="mb-4">
+    Edit Result
+</h2>
+
+<div class="form-container">
+
+    <form method="post">
+
+        <input type="hidden"
+               asp-for="Result.ResultId" />
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Sport
+            </label>
+
+            <select asp-for="Result.SportId"
+                    asp-items="Model.Sports"
+                    class="form-select">
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Participant
+            </label>
+
+            <select asp-for="Result.ParticipantId"
+                    asp-items="Model.Participants"
+                    class="form-select">
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Start
+            </label>
+
+            <select asp-for="Result.StartId"
+                    asp-items="Model.Starts"
+                    class="form-select">
+            </select>
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Place
+            </label>
+
+            <input asp-for="Result.Place"
+                   type="number"
+                   class="form-control" />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Result Value
+            </label>
+
+            <input asp-for="Result.ResultValue"
+                   class="form-control" />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-warning">
+
+            Save
+
+        </button>
+
+        <a asp-page="Index"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </form>
+
+</div>
