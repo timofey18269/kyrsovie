@@ -6,9 +6,9 @@ namespace OlympiadViewer.Models
     {
         public int SportId { get; set; }
 
-        public string SportName { get; set; }
+        public string? SportName { get; set; }
 
-        public string SportType { get; set; }
+        public string? SportType { get; set; }
 
         // Navigation
 

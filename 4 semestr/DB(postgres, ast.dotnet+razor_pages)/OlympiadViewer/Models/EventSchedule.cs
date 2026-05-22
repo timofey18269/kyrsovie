@@ -19,11 +19,11 @@ namespace OlympiadViewer.Models
 
         // Navigation
 
-        public Sport Sport { get; set; }
+        public Sport? Sport { get; set; }
 
-        public Venue Venue { get; set; }
+        public Venue? Venue { get; set; }
 
-        public ICollection<Result> Results { get; set; }
+        public ICollection<Result>? Results { get; set; }
             = new List<Result>();
     }
 }

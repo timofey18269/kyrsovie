@@ -6,16 +6,16 @@ namespace OlympiadViewer.Models
     {
         public int VenueId { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         // PostgreSQL integer[]
-        public int[] PossibleSports { get; set; }
+        public int[]? PossibleSports { get; set; }
 
         // Navigation
 
-        public ICollection<EventSchedule> EventSchedules { get; set; }
+        public ICollection<EventSchedule>? EventSchedules { get; set; }
             = new List<EventSchedule>();
     }
 }

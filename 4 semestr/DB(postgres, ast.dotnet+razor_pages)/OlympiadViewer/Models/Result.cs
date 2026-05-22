@@ -12,14 +12,14 @@
 
         public int Place { get; set; }
 
-        public string ResultValue { get; set; }
+        public string? ResultValue { get; set; }
 
         // Navigation
 
-        public Sport Sport { get; set; }
+        public Sport ? Sport { get; set; }
 
-        public Participant Participant { get; set; }
+        public Participant ? Participant { get; set; }
 
-        public EventSchedule EventSchedule { get; set; }
+        public EventSchedule ? EventSchedule { get; set; }
     }
 }
