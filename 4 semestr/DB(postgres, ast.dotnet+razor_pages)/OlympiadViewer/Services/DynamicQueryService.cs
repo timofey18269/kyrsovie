@@ -11,9 +11,7 @@ namespace OlympiadViewer.Services
         // SEARCH (для string полей)
         // =========================================================
 
-        public static IQueryable<T> ApplySearch<T>(
-            IQueryable<T> query,
-            string searchTerm)
+        public static IQueryable<T> ApplySearch<T>(IQueryable<T> query, string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
                 return query;
@@ -24,59 +22,38 @@ namespace OlympiadViewer.Services
 
             Expression finalExpression = null;
 
-            var stringProperties = typeof(T)
-                .GetProperties()
-                .Where(p => p.PropertyType == typeof(string));
+            var stringProperties = typeof(T) .GetProperties().Where(p => p.PropertyType == typeof(string));
 
             foreach (var property in stringProperties)
             {
                 // x.Property
-                var propertyExpression =
-                    Expression.Property(parameter, property);
+                var propertyExpression = Expression.Property(parameter, property);
 
                 // x.Property != null
-                var notNull =
-                    Expression.NotEqual(
-                        propertyExpression,
-                        Expression.Constant(null));
+                var notNull = Expression.NotEqual( propertyExpression, Expression.Constant(null));
 
                 // x.Property.ToLower()
-                var toLowerMethod =
-                    typeof(string).GetMethod("ToLower", Type.EmptyTypes);
+                var toLowerMethod = typeof(string).GetMethod("ToLower", Type.EmptyTypes);
 
-                var toLowerExpression =
-                    Expression.Call(propertyExpression, toLowerMethod);
+                var toLowerExpression =  Expression.Call(propertyExpression, toLowerMethod);
 
                 // x.Property.ToLower().Contains(searchTerm)
-                var containsMethod =
-                    typeof(string).GetMethod(
-                        "Contains",
-                        new[] { typeof(string) });
+                var containsMethod = typeof(string).GetMethod( "Contains", new[] { typeof(string) });
 
-                var containsExpression =
-                    Expression.Call(
-                        toLowerExpression,
-                        containsMethod,
-                        Expression.Constant(searchTerm));
+                var containsExpression = Expression.Call( toLowerExpression, containsMethod, Expression.Constant(searchTerm));
 
                 // x.Property != null &&
                 // x.Property.ToLower().Contains(searchTerm)
 
-                var combined =
-                    Expression.AndAlso(notNull, containsExpression);
+                var combined = Expression.AndAlso(notNull, containsExpression);
 
-                finalExpression = finalExpression == null
-                    ? combined
-                    : Expression.OrElse(finalExpression, combined);
+                finalExpression = finalExpression == null ? combined : Expression.OrElse(finalExpression, combined);
             }
 
             if (finalExpression == null)
                 return query;
 
-            var lambda =
-                Expression.Lambda<Func<T, bool>>(
-                    finalExpression,
-                    parameter);
+            var lambda = Expression.Lambda<Func<T, bool>>(finalExpression, parameter);
 
             return query.Where(lambda);
         }
@@ -86,16 +63,12 @@ namespace OlympiadViewer.Services
         // SORTING
         // =========================================================
 
-        public static IQueryable<T> ApplySorting<T>(
-            IQueryable<T> query,
-            string sortColumn,
-            string sortDirection)
+        public static IQueryable<T> ApplySorting<T>( IQueryable<T> query, string sortColumn, string sortDirection)
         {
             if (string.IsNullOrWhiteSpace(sortColumn))
                 return query;
 
-            var property = typeof(T)
-                .GetProperty(
+            var property = typeof(T) .GetProperty(
                     sortColumn,
                     BindingFlags.IgnoreCase |
                     BindingFlags.Public |
@@ -106,20 +79,13 @@ namespace OlympiadViewer.Services
 
             var parameter = Expression.Parameter(typeof(T), "x");
 
-            var propertyAccess =
-                Expression.Property(parameter, property);
+            var propertyAccess = Expression.Property(parameter, property);
 
-            var orderByExpression =
-                Expression.Lambda(propertyAccess, parameter);
+            var orderByExpression = Expression.Lambda(propertyAccess, parameter);
 
-            string methodName =
-                sortDirection?.ToLower() == "desc"
-                    ? "OrderByDescending"
-                    : "OrderBy";
+            string methodName = sortDirection?.ToLower() == "desc" ? "OrderByDescending" : "OrderBy";
 
-            var resultExpression =
-                Expression.Call(
-                    typeof(Queryable),
+            var resultExpression = Expression.Call( typeof(Queryable),
                     methodName,
                     new Type[]
                     {
@@ -236,19 +202,16 @@ namespace OlympiadViewer.Services
 
             var parameter = Expression.Parameter(typeof(T), "x");
 
-            var propertyExpression =
-                Expression.Property(parameter, property);
+            var propertyExpression = Expression.Property(parameter, property);
 
             Expression finalExpression = null;
 
             // >= fromDate
             if (fromDate.HasValue)
             {
-                var fromConstant =
-                    Expression.Constant(fromDate.Value);
+                var fromConstant = Expression.Constant(fromDate.Value);
 
-                var greaterThan =
-                    Expression.GreaterThanOrEqual(
+                var greaterThan = Expression.GreaterThanOrEqual(
                         propertyExpression,
                         fromConstant);
 
@@ -258,11 +221,9 @@ namespace OlympiadViewer.Services
             // <= toDate
             if (toDate.HasValue)
             {
-                var toConstant =
-                    Expression.Constant(toDate.Value);
+                var toConstant = Expression.Constant(toDate.Value);
 
-                var lessThan =
-                    Expression.LessThanOrEqual(
+                var lessThan = Expression.LessThanOrEqual(
                         propertyExpression,
                         toConstant);
 
@@ -274,8 +235,7 @@ namespace OlympiadViewer.Services
             if (finalExpression == null)
                 return query;
 
-            var lambda =
-                Expression.Lambda<Func<T, bool>>(
+            var lambda = Expression.Lambda<Func<T, bool>>(
                     finalExpression,
                     parameter);
 
