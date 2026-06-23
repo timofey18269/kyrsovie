@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Мера</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+                    th:object="${measure}"
+
+                    th:action="${measure.measureId == 0}
+                ? @{/measures/create}
+                : @{/measures/edit/{id}(id=${measure.measureId})}"
+
+                    method="post">
+
+                <div class="form-group">
+
+                    <label>Дело</label>
+
+                    <select th:field="*{caseId}" required>
+
+                        <option
+                                th:each="c : ${cases}"
+                                th:value="${c.caseId}"
+                                th:text="${c.caseNumber}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Задержанный</label>
+
+                    <select th:field="*{detaineeId}" required>
+
+                        <option
+                                th:each="d : ${detainees}"
+                                th:value="${d.detaineeId}"
+                                th:text="${d.lastName + ' ' + d.firstName}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Тип меры</label>
+
+                    <select th:field="*{measureType}" required>
+
+                        <option value="Штраф">Штраф</option>
+
+                        <option value="Предупреждение">
+                            Предупреждение
+                        </option>
+
+                        <option value="Административный арест">
+                            Административный арест
+                        </option>
+
+                        <option value="Устное замечание">
+                            Устное замечание
+                        </option>
+
+                        <option value="Обязательные работы">
+                            Обязательные работы
+                        </option>
+
+                        <option value="Конфискация">
+                            Конфискация
+                        </option>
+
+                        <option value="Передача материалов в суд">
+                            Передача материалов в суд
+                        </option>
+
+                        <option value="Передача материалов следствию">
+                            Передача материалов следствию
+                        </option>
+
+                        <option value="Освобождение без санкций">
+                            Освобождение без санкций
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Описание</label>
+
+                    <textarea
+                            rows="5"
+                            th:field="*{description}">
+                    </textarea>
+
+                </div>
+
+                <button
+                        class="btn btn-add"
+                        type="submit">
+
+                    Сохранить
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

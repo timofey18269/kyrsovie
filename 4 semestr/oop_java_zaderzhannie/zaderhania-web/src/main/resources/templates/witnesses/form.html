@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Свидетель</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+                    th:object="${witness}"
+
+                    th:action="${witness.witnessId == 0}
+                    ? @{/witnesses/create}
+                    : @{/witnesses/edit/{id}(id=${witness.witnessId})}"
+
+                    method="post">
+
+                <div class="form-group">
+                    <label>Фамилия</label>
+                    <input type="text"
+                           th:field="*{lastName}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input type="text"
+                           th:field="*{firstName}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Отчество</label>
+                    <input type="text"
+                           th:field="*{middleName}">
+                </div>
+
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="text"
+                           th:field="*{phone}">
+                </div>
+
+                <div class="form-group">
+                    <label>Адрес</label>
+                    <textarea th:field="*{address}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Показания</label>
+                    <textarea th:field="*{statement}"></textarea>
+                </div>
+
+                <button
+                        class="btn btn-add"
+                        type="submit">
+                    Сохранить
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

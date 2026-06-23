@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Задержанные</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <a th:href="@{/detainees/create}"
+           class="btn btn-add">
+            Добавить запись
+        </a>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ФИО</th>
+                    <th>Паспорт</th>
+                    <th>Телефон</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="d : ${detainees}">
+
+                    <td th:text="${d.detaineeId}"></td>
+
+                    <td th:text="${d.lastName + ' ' + d.firstName + ' ' + d.middleName}">
+                    </td>
+
+                    <td th:text="${d.passportNumber}"></td>
+
+                    <td th:text="${d.phone}"></td>
+
+                    <td th:text="${d.status}"></td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <a class="btn btn-edit"
+                               th:href="@{/detainees/edit/{id}(id=${d.detaineeId})}">
+                                Редактировать
+                            </a>
+
+                            <form class="delete-form"
+                                  th:action="@{/detainees/delete/{id}(id=${d.detaineeId})}"
+                                  method="post">
+
+                                <button
+                                        class="btn btn-delete"
+                                        type="submit">
+                                    Удалить
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

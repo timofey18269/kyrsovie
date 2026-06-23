@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Типы правонарушений</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <a th:href="@{/offenses/create}" class="btn btn-add">
+            Добавить запись
+        </a>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Описание</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="o : ${offenses}">
+
+                    <td th:text="${o.offenseTypeId}"></td>
+                    <td th:text="${o.name}"></td>
+                    <td th:text="${o.description}"></td>
+
+                    <td>
+                        <div class="actions">
+
+                            <a class="btn btn-edit"
+                               th:href="@{/offenses/edit/{id}(id=${o.offenseTypeId})}">
+                                Редактировать
+                            </a>
+
+                            <form class="delete-form"
+                                  th:action="@{/offenses/delete/{id}(id=${o.offenseTypeId})}"
+                                  method="post">
+
+                                <button class="btn btn-delete" type="submit">
+                                    Удалить
+                                </button>
+
+                            </form>
+
+                        </div>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

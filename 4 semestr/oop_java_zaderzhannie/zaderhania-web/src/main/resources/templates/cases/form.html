@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Дело</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+                    th:object="${caseObj}"
+
+                    th:action="${caseObj.caseId == 0}
+                    ? @{/cases/create}
+                    : @{/cases/edit/{id}(id=${caseObj.caseId})}"
+
+                    method="post">
+
+                <div class="form-group">
+
+                    <label>Номер дела</label>
+
+                    <input
+                            type="text"
+                            th:field="*{caseNumber}"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Заявление</label>
+
+                    <select th:field="*{reportId}">
+
+                        <option value="">
+                            Не выбрано
+                        </option>
+
+                        <option
+                                th:each="r : ${reports}"
+                                th:value="${r.reportId}"
+                                th:text="${r.reportNumber}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Тип правонарушения</label>
+
+                    <select
+                            th:field="*{offenseTypeId}"
+                            required>
+
+                        <option
+                                th:each="o : ${offenseTypes}"
+                                th:value="${o.offenseTypeId}"
+                                th:text="${o.name}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Дата закрытия</label>
+
+                    <input
+                            type="datetime-local"
+                            th:field="*{closedAt}">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Статус</label>
+
+                    <select
+                            th:field="*{status}"
+                            required>
+
+                        <option value="Открыто">
+                            Открыто
+                        </option>
+
+                        <option value="В расследовании">
+                            В расследовании
+                        </option>
+
+                        <option value="Закрыто">
+                            Закрыто
+                        </option>
+
+                        <option value="Передано в суд">
+                            Передано в суд
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Описание</label>
+
+                    <textarea
+                            rows="6"
+                            th:field="*{description}">
+                    </textarea>
+
+                </div>
+
+                <button
+                        type="submit"
+                        class="btn btn-add">
+
+                    Сохранить
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

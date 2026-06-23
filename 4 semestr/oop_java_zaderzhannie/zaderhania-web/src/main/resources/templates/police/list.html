@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Полицейские</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <a th:href="@{/police/create}"
+           class="btn btn-add">
+            Добавить запись
+        </a>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Жетон</th>
+                    <th>ФИО</th>
+                    <th>Звание</th>
+                    <th>Телефон</th>
+                    <th>Активен</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="o : ${officers}">
+
+                    <td th:text="${o.officerId}"></td>
+                    <td th:text="${o.badgeNumber}"></td>
+
+                    <td th:text="${o.lastName + ' ' + o.firstName + ' ' + o.middleName}">
+                    </td>
+
+                    <td th:text="${o.rankName}"></td>
+                    <td th:text="${o.phone}"></td>
+                    <td th:text="${o.active ? 'Да' : 'Нет'}"></td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <a class="btn btn-edit"
+                               th:href="@{/police/edit/{id}(id=${o.officerId})}">
+                                Редактировать
+                            </a>
+
+                            <form class="delete-form"
+                                  th:action="@{/police/delete/{id}(id=${o.officerId})}"
+                                  method="post">
+
+                                <button
+                                        type="submit"
+                                        class="btn btn-delete">
+                                    Удалить
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

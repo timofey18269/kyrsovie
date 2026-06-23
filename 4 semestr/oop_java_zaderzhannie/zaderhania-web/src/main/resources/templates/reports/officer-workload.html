@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Нагрузка сотрудников</title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}">
+    </div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}">
+        </div>
+
+        <a class="btn btn-add"
+           th:href="@{/reports/officer-workload/excel}">
+            Скачать Excel
+        </a>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Жетон</th>
+                    <th>ФИО</th>
+                    <th>Должность</th>
+                    <th>Звание</th>
+                    <th>Активен</th>
+                    <th>Дел</th>
+                    <th>Роли</th>
+                    <th>Задержанных</th>
+                    <th>Мер</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="r : ${rows}">
+
+                    <td th:text="${r.officerId}"></td>
+
+                    <td th:text="${r.badgeNumber}"></td>
+
+                    <td th:text="${r.fullName}"></td>
+
+                    <td th:text="${r.positionName}"></td>
+
+                    <td th:text="${r.rankName}"></td>
+
+                    <td th:text="${r.active ? 'Да' : 'Нет'}"></td>
+
+                    <td th:text="${r.casesCount}"></td>
+
+                    <td th:text="${r.roles}"></td>
+
+                    <td th:text="${r.detaineesHandled}"></td>
+
+                    <td th:text="${r.measuresInCases}"></td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

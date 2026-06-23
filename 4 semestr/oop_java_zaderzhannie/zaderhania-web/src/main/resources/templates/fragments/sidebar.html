@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="sidebar" class="sidebar">
+
+    <h2>Учет задержаний</h2>
+
+    <ul>
+
+        <li>
+            <a th:href="@{/}">
+                Главная
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/cases}">
+                Дела
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/cases/assign}">
+                Назначить участников дела
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/police}">
+                Полицейские
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/detainees}">
+                Задержанные
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/witnesses}">
+                Свидетели
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/reports}">
+                Заявления
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/measures}">
+                Принятые меры
+            </a>
+        </li>
+<!--        <li>-->
+<!--            <a th:href="@{/cells}">-->
+<!--                Камеры-->
+<!--            </a>-->
+<!--        </li>-->
+
+<!--        <li>-->
+<!--            <a th:href="@{/history}">-->
+<!--                История камер-->
+<!--            </a>-->
+<!--        </li>-->
+
+        <li>
+            <a th:href="@{/offenses}">
+                Типы правонарушений
+            </a>
+        </li>
+
+        <li>
+            <a th:href="@{/positions}">
+                Должности
+            </a>
+        </li>
+        <li>
+            <p>
+                -------------------------------
+            </p>
+        </li>
+        <li>
+            <a th:href="@{/reports/case-summary}">
+                Отчёт по делам
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/reports/officer-workload}">
+                Нагрузка сотрудников
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>

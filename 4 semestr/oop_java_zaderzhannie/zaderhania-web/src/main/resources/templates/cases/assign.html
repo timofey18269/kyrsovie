@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Назначение участников дела</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <h2>Назначить участников дела</h2>
+
+            <!-- ПОЛИЦЕЙСКИЙ -->
+            <h3>Полицейский</h3>
+
+            <form method="post" th:action="@{/cases/assign/officer}">
+
+                <select name="caseId" required>
+                    <option th:each="c : ${cases}"
+                            th:value="${c.caseId}"
+                            th:text="${c.caseNumber}">
+                    </option>
+                </select>
+
+                <select name="officerId" required>
+                    <option th:each="o : ${officers}"
+                            th:value="${o.officerId}"
+                            th:text="${o.lastName + ' ' + o.firstName}">
+                    </option>
+                </select>
+
+                <button class="btn btn-add" type="submit">
+                    Добавить
+                </button>
+
+            </form>
+
+            <br><hr><br>
+
+            <!-- ЗАДЕРЖАННЫЙ -->
+            <h3>Задержанный</h3>
+
+            <form method="post" th:action="@{/cases/assign/detainee}">
+
+                <select name="caseId" required>
+                    <option th:each="c : ${cases}"
+                            th:value="${c.caseId}"
+                            th:text="${c.caseNumber}">
+                    </option>
+                </select>
+
+                <select name="detaineeId" required>
+                    <option th:each="d : ${detainees}"
+                            th:value="${d.detaineeId}"
+                            th:text="${d.lastName + ' ' + d.firstName}">
+                    </option>
+                </select>
+
+                <button class="btn btn-add" type="submit">
+                    Добавить
+                </button>
+
+            </form>
+
+            <br><hr><br>
+
+            <!-- СВИДЕТЕЛЬ -->
+            <h3>Свидетель</h3>
+
+            <form method="post" th:action="@{/cases/assign/witness}">
+
+                <select name="caseId" required>
+                    <option th:each="c : ${cases}"
+                            th:value="${c.caseId}"
+                            th:text="${c.caseNumber}">
+                    </option>
+                </select>
+
+                <select name="witnessId" required>
+                    <option th:each="w : ${witnesses}"
+                            th:value="${w.witnessId}"
+                            th:text="${w.lastName + ' ' + w.firstName}">
+                    </option>
+                </select>
+
+                <button class="btn btn-add" type="submit">
+                    Добавить
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

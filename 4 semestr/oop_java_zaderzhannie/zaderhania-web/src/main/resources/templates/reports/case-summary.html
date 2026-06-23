@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Отчёт по делам</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <a class="btn btn-add"
+           th:href="@{/reports/case-summary/excel}">
+            Скачать Excel
+        </a>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Номер дела</th>
+                    <th>Тип</th>
+                    <th>Статус</th>
+                    <th>Заявление</th>
+                    <th>Открыто</th>
+                    <th>Закрыто</th>
+                    <th>Полицейских</th>
+                    <th>Задержанных</th>
+                    <th>Свидетелей</th>
+                    <th>Мер</th>
+                    <th>Типы мер</th>
+                    <th>Описание</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="r : ${rows}">
+                    <td th:text="${r.caseId}"></td>
+                    <td th:text="${r.caseNumber}"></td>
+                    <td th:text="${r.offenseType}"></td>
+                    <td th:text="${r.caseStatus}"></td>
+                    <td th:text="${r.reportNumber}"></td>
+                    <td th:text="${r.openedAt}"></td>
+                    <td th:text="${r.closedAt}"></td>
+                    <td th:text="${r.officersCount}"></td>
+                    <td th:text="${r.detaineesCount}"></td>
+                    <td th:text="${r.witnessesCount}"></td>
+                    <td th:text="${r.measuresCount}"></td>
+                    <td th:text="${r.measureTypes}"></td>
+                    <td th:text="${r.description}"></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

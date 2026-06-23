@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Дело</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="case-details">
+
+            <div class="case-main">
+
+                <div class="table-container">
+
+                    <h2>
+                        Дело
+                        <span th:text="${details.caseInfo.caseNumber}"></span>
+                    </h2>
+
+                    <br>
+
+                    <table>
+
+                        <tr>
+                            <th>ID</th>
+                            <td th:text="${details.caseInfo.caseId}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Номер дела</th>
+                            <td th:text="${details.caseInfo.caseNumber}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Дата открытия</th>
+                            <td th:text="${details.caseInfo.openedAt}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Дата закрытия</th>
+                            <td th:text="${details.caseInfo.closedAt}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Статус</th>
+                            <td th:text="${details.caseInfo.status}"></td>
+                        </tr>
+
+                        <tr>
+                            <th>Описание</th>
+                            <td th:text="${details.caseInfo.description}"></td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="case-sidebar">
+
+                <h3>Полицейские</h3>
+
+                <ul>
+                    <li th:each="o : ${details.officers}"
+                        th:text="${o}">
+                    </li>
+                </ul>
+
+                <h3>Задержанные</h3>
+
+                <ul>
+                    <li th:each="d : ${details.detainees}"
+                        th:text="${d}">
+                    </li>
+                </ul>
+
+                <h3>Свидетели</h3>
+
+                <ul>
+                    <li th:each="w : ${details.witnesses}"
+                        th:text="${w}">
+                    </li>
+                </ul>
+
+                <h3>Принятые меры</h3>
+
+                <ul>
+                    <li th:each="m : ${details.measures}"
+                        th:text="${m}">
+                    </li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

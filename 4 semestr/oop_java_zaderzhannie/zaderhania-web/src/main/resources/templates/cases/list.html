@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Дела</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <a th:href="@{/cases/create}"
+           class="btn btn-add">
+            Добавить запись
+        </a>
+
+        <br><br>
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Номер дела</th>
+                    <th>Заявление</th>
+                    <th>Тип правонарушения</th>
+                    <th>Открыто</th>
+                    <th>Закрыто</th>
+                    <th>Статус</th>
+                    <th>Описание</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:each="c : ${cases}">
+
+                    <td th:text="${c.caseId}"></td>
+                    <td th:text="${c.caseNumber}"></td>
+                    <td th:text="${c.reportNumber}"></td>
+                    <td th:text="${c.offenseTypeName}"></td>
+                    <td th:text="${c.openedAt}"></td>
+                    <td th:text="${c.closedAt}"></td>
+                    <td th:text="${c.status}"></td>
+                    <td th:text="${c.description}"></td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <a class="btn btn-edit"
+                               th:href="@{/cases/details/{id}(id=${c.caseId})}">
+                                Подробнее
+                            </a>
+
+                            <a class="btn btn-edit"
+                               th:href="@{/cases/edit/{id}(id=${c.caseId})}">
+                                Редактировать
+                            </a>
+
+                            <form class="delete-form"
+                                  method="post"
+                                  th:action="@{/cases/delete/{id}(id=${c.caseId})}">
+
+                                <button
+                                        type="submit"
+                                        class="btn btn-delete">
+                                    Удалить
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

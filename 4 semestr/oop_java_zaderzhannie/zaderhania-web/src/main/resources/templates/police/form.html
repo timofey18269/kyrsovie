@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Полицейский</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+                    th:object="${officer}"
+
+                    th:action="${officer.officerId == 0}
+                    ? @{/police/create}
+                    : @{/police/edit/{id}(id=${officer.officerId})}"
+
+                    method="post">
+
+                <div class="form-group">
+                    <label>Номер жетона</label>
+                    <input type="text"
+                           th:field="*{badgeNumber}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Фамилия</label>
+                    <input type="text"
+                           th:field="*{lastName}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input type="text"
+                           th:field="*{firstName}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Отчество</label>
+                    <input type="text"
+                           th:field="*{middleName}">
+                </div>
+
+                <div class="form-group">
+                    <label>Должность</label>
+
+                    <select th:field="*{positionId}">
+
+                        <option value="">
+                            ---
+                        </option>
+
+                        <option
+                                th:each="p : ${positions}"
+                                th:value="${p.positionId}"
+                                th:text="${p.name}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Звание</label>
+                    <input type="text"
+                           th:field="*{rankName}">
+                </div>
+
+                <div class="form-group">
+                    <label>Дата приема</label>
+                    <input type="date"
+                           th:field="*{hireDate}">
+                </div>
+
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="text"
+                           th:field="*{phone}">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email"
+                           th:field="*{email}">
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+
+                        <input type="checkbox"
+                               th:field="*{active}">
+
+                        Активен
+
+                    </label>
+
+                </div>
+
+                <button
+                        type="submit"
+                        class="btn btn-add">
+                    Сохранить
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

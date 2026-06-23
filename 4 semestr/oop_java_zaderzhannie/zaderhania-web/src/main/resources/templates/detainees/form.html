@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Задержанный</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+                    th:object="${detainee}"
+
+                    th:action="${detainee.detaineeId == 0}
+                    ? @{/detainees/create}
+                    : @{/detainees/edit/{id}(id=${detainee.detaineeId})}"
+
+                    method="post">
+
+                <div class="form-group">
+                    <label>Фамилия</label>
+                    <input type="text"
+                           th:field="*{lastName}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Имя</label>
+                    <input type="text"
+                           th:field="*{firstName}"
+                           required>
+                </div>
+
+                <div class="form-group">
+                    <label>Отчество</label>
+                    <input type="text"
+                           th:field="*{middleName}">
+                </div>
+
+                <div class="form-group">
+                    <label>Дата рождения</label>
+                    <input type="date"
+                           th:field="*{birthDate}">
+                </div>
+
+                <div class="form-group">
+                    <label>Паспорт</label>
+                    <input type="text"
+                           th:field="*{passportNumber}">
+                </div>
+
+                <div class="form-group">
+                    <label>Адрес</label>
+                    <textarea th:field="*{address}"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Телефон</label>
+                    <input type="text"
+                           th:field="*{phone}">
+                </div>
+
+                <div class="form-group">
+
+                    <label>Статус</label>
+
+                    <select th:field="*{status}">
+
+                        <option value="В камере">
+                            В камере
+                        </option>
+
+                        <option value="Отпущен">
+                            Отпущен
+                        </option>
+
+                        <option value="Переведён">
+                            Переведён
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Примечания</label>
+                    <textarea th:field="*{notes}"></textarea>
+                </div>
+
+                <button
+                        class="btn btn-add"
+                        type="submit">
+
+                    Сохранить
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

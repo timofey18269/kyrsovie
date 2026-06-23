@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Тип правонарушения</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form th:object="${offense}"
+                  th:action="${offense.offenseTypeId == 0}
+                  ? @{/offenses/create}
+                  : @{/offenses/edit/{id}(id=${offense.offenseTypeId})}"
+                  method="post">
+
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" th:field="*{name}" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Описание</label>
+                    <textarea th:field="*{description}"></textarea>
+                </div>
+
+                <button class="btn btn-add" type="submit">
+                    Сохранить
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

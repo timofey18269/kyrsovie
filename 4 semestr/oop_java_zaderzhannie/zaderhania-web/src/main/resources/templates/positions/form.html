@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Должность</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+                    th:object="${position}"
+
+                    th:action="${position.positionId == 0}
+                    ? @{/positions/create}
+                    : @{/positions/edit/{id}(id=${position.positionId})}"
+
+                    method="post">
+
+                <div class="form-group">
+
+                    <label>Название должности</label>
+
+                    <input
+                            type="text"
+                            th:field="*{name}"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Оклад</label>
+
+                    <input
+                            type="number"
+                            step="0.01"
+                            th:field="*{salary}"
+                            required>
+
+                </div>
+
+                <button
+                        class="btn btn-add"
+                        type="submit">
+
+                    Сохранить
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

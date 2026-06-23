@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Заявление о правонарушении</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <div class="content">
+
+        <div th:replace="~{fragments/header :: header}"></div>
+
+        <div class="form-container">
+
+            <form
+
+                    th:object="${report}"
+
+                    th:action="${report.reportId == 0}
+                    ? @{/reports/create}
+                    : @{/reports/edit/{id}(id=${report.reportId})}"
+
+                    method="post">
+
+                <div class="form-group">
+
+                    <label>Номер заявления</label>
+
+                    <input
+                            type="text"
+                            th:field="*{reportNumber}"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Свидетель</label>
+
+                    <select th:field="*{witnessId}">
+
+                        <option value="">
+                            ---
+                        </option>
+
+                        <option
+                                th:each="w : ${witnesses}"
+                                th:value="${w.witnessId}"
+                                th:text="${w.lastName + ' ' + w.firstName + ' ' + w.middleName}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Тип правонарушения</label>
+
+                    <select th:field="*{offenseTypeId}">
+
+                        <option value="">
+                            ---
+                        </option>
+
+                        <option
+                                th:each="o : ${offenseTypes}"
+                                th:value="${o.offenseTypeId}"
+                                th:text="${o.name}">
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Место происшествия</label>
+
+                    <textarea
+                            rows="3"
+                            th:field="*{location}">
+                    </textarea>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Описание правонарушения</label>
+
+                    <textarea
+                            rows="8"
+                            required
+                            th:field="*{description}">
+                    </textarea>
+
+                </div>
+
+                <button
+                        type="submit"
+                        class="btn btn-add">
+
+                    Сохранить
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
